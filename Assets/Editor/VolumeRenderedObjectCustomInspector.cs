@@ -6,6 +6,7 @@ namespace UnityVolumeRendering
     [CustomEditor(typeof(VolumeRenderedObject))]
     public class VolumeRenderedObjectCustomInspector : Editor
     {
+        
         public override void OnInspectorGUI()
         {
             VolumeRenderedObject volrendObj = (VolumeRenderedObject)target;

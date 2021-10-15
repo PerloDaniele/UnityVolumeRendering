@@ -30,7 +30,7 @@ using openDicom.DataStructure.DataSet;
 using openDicom.Encoding;
 using openDicom.Image;
 
-
+#pragma warning disable 0169
 namespace openDicom.File
 {
 
@@ -192,7 +192,7 @@ namespace openDicom.File
                     return false;
                 return true;
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return false;
             }
@@ -232,3 +232,4 @@ namespace openDicom.File
     }
 
 }
+#pragma warning restore 0169

@@ -18,8 +18,8 @@ namespace UnityVolumeRendering
         public MeshRenderer meshRenderer;
 
         private RenderMode renderMode;
-        private TFRenderMode tfRenderMode;
-        private bool lightingEnabled;
+        private TFRenderMode tfRenderMode = TFRenderMode.TF2D;
+        private bool lightingEnabled = true;
 
         private Vector2 visibilityWindow = new Vector2(0.0f, 1.0f);
 

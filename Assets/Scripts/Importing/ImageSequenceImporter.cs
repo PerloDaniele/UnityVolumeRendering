@@ -160,6 +160,7 @@ namespace UnityVolumeRendering
         {
             string name = Path.GetFileName(directoryPath);
 
+            /*
             VolumeDataset dataset = new VolumeDataset()
             {
                 name = name,
@@ -172,6 +173,18 @@ namespace UnityVolumeRendering
                 scaleY = (float)dimensions.y / (float)dimensions.x,
                 scaleZ = (float)dimensions.z / (float)dimensions.x
             };
+            */
+
+            VolumeDataset dataset = ScriptableObject.CreateInstance<VolumeDataset>();
+            dataset.name = name;
+            dataset.datasetName = name;
+            dataset.data = data;
+            dataset.dimX = dimensions.x;
+            dataset.dimY = dimensions.y;
+            dataset.dimZ = dimensions.z;
+            dataset.scaleX = 1f; // Scale arbitrarily normalised around the x-axis 
+            dataset.scaleY = (float)dimensions.y / (float)dimensions.x;
+            dataset.scaleZ = (float)dimensions.z / (float)dimensions.x;
 
             return dataset;
         }

@@ -48,6 +48,8 @@ namespace UnityVolumeRendering
                 volObj.transform.localScale = new Vector3(dataset.scaleX / maxScale, dataset.scaleY / maxScale, dataset.scaleZ / maxScale);
             }
 
+            volObj.SetTransferFunctionMode(TFRenderMode.TF2D);
+            volObj.SetLightingEnabled(true);
             return volObj;
         }
 

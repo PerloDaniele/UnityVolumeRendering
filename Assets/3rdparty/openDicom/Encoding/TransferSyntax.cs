@@ -139,7 +139,7 @@ namespace openDicom.Encoding
                                 throw new DicomException("The deflated " +
                                     "transfer syntax is not supported.",
                                     "uid", uid.ToString());
-                                break;
+                               
                             default:
                                 // defaults for transfer syntax for JPEG
                                 // (1.2.840.10008.1.2.4.*) and RLE
@@ -440,3 +440,4 @@ namespace openDicom.Encoding
         }
     }
 }
+

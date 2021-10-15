@@ -221,39 +221,39 @@ namespace openDicom.DataStructure
         {
             switch (name)
             {
-                case "AE": return new ApplicationEntity(tag); break;
-                case "AS": return new AgeString(tag); break;
-                case "AT": return new AttributeTag(tag); break;
-                case "CS": return new CodeString(tag); break;
-                case "DA": return new Date(tag); break;
-                case "DS": return new DecimalString(tag); break;
-                case "DT": return new DateTime(tag); break;
-                case "FL": return new FloatingPointSingle(tag); break;
-                case "FD": return new FloatingPointDouble(tag); break;
-                case "IS": return new IntegerString(tag); break;
-                case "LO": return new LongString(tag); break;
-                case "LT": return new LongText(tag); break;
-                case "OB": return new OtherByteString(tag); break;
-                case "OF": return new OtherFloatString(tag); break;
-                case "OW": return new OtherWordString(tag); break;
-                case "PN": return new PersonName(tag); break;
-                case "SH": return new ShortName(tag); break;
-                case "SL": return new SignedLong(tag); break;
-                case "SQ": return new SequenceOfItems(tag); break;
-                case "SS": return new SignedShort(tag); break;
-                case "ST": return new ShortText(tag); break;
-                case "TM": return new Time(tag); break;
-                case "UI": return new UniqueIdentifier(tag); break;
-                case "UL": return new UnsignedLong(tag); break;
-                case "UN": return new Unknown(tag); break;
-                case "US": return new UnsignedShort(tag); break;
-                case "UT": return new UnlimitedText(tag); break;
-                case null: 
-                case "": return new ValueRepresentation(tag); break;
-                default:
+                case "AE": return new ApplicationEntity(tag); 
+                case "AS": return new AgeString(tag); 
+                case "AT": return new AttributeTag(tag); 
+                case "CS": return new CodeString(tag); 
+                case "DA": return new Date(tag);
+                case "DS": return new DecimalString(tag); 
+                case "DT": return new DateTime(tag); 
+                case "FL": return new FloatingPointSingle(tag);
+                case "FD": return new FloatingPointDouble(tag);
+                case "IS": return new IntegerString(tag);
+                case "LO": return new LongString(tag);
+                case "LT": return new LongText(tag);
+                case "OB": return new OtherByteString(tag);
+                case "OF": return new OtherFloatString(tag);
+                case "OW": return new OtherWordString(tag);
+                case "PN": return new PersonName(tag);
+                case "SH": return new ShortName(tag);
+                case "SL": return new SignedLong(tag);
+                case "SQ": return new SequenceOfItems(tag);
+                case "SS": return new SignedShort(tag);
+                case "ST": return new ShortText(tag);
+                case "TM": return new Time(tag);
+                case "UI": return new UniqueIdentifier(tag);
+                case "UL": return new UnsignedLong(tag);
+                case "UN": return new Unknown(tag); 
+                case "US": return new UnsignedShort(tag); 
+                case "UT": return new UnlimitedText(tag); 
+                case null: return new ValueRepresentation(tag);
+                case "": return new ValueRepresentation(tag); 
+                default: 
                     throw new DicomException(
                         "Value representation is not valid.", "name", name);
-                    break;
+                    
             }            
         }
 
@@ -316,27 +316,28 @@ namespace openDicom.DataStructure
         public static ValueRepresentation LoadFrom(Stream stream, Tag tag)
         {
             DicomContext.Set(stream, tag);
+            ValueRepresentation vr;
             if (IsImplicitBy(tag))
             {
                 if (tag.IsUserDefined)
                     // implicit but unknown value representation
-                    return GetBy("UN", tag);
+                    vr = GetBy("UN", tag);
                 else
                     // implicit but known value representation;
                     // return new instance, dictionary entry do not have a
                     // transfer syntax
-                    return GetBy(tag.GetDictionaryEntry().VR.Name, tag);            
+                    vr = GetBy(tag.GetDictionaryEntry().VR.Name, tag);            
             }
             else
             {
                 // explicit value representation
                 byte[] buffer = new byte[2];
                 stream.Read(buffer, 0, 2);
-                string name = ByteConvert.ToString(buffer,
-                    CharacterRepertoire.Default);
-                return GetBy(name, tag);
+                string name = ByteConvert.ToString(buffer, CharacterRepertoire.Default);
+                vr = GetBy(name, tag);
             }
-            DicomContext.Reset();           
+            DicomContext.Reset();
+            return vr;
         }
 
         /// <summary>

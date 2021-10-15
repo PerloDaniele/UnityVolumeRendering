@@ -71,7 +71,7 @@ namespace openDicom.Encoding
                                 int.Parse(minute), int.Parse(second),
                                 int.Parse(millisecond));
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
                             throw new EncodingException(
                                 "Time format is invalid.",
@@ -115,7 +115,7 @@ namespace openDicom.Encoding
                                 int.Parse(minute), int.Parse(second),
                                 int.Parse(millisecond));
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
                             throw new EncodingException(
                                 "Time format is invalid.",

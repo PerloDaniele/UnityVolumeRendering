@@ -56,12 +56,15 @@ namespace openDicom.Encoding
             if (vm.Equals(1) || vm.IsUndefined)
             {
                 // 0xFFFFFFFF is reserved!
+                unlimitedText = unlimitedText.TrimEnd(null);
+                /*
                 if (unlimitedText.Length <= 0xFFFFFFFE)
                     unlimitedText = unlimitedText.TrimEnd(null);
                 else
                     throw new EncodingException(
                         "A value of max. 2^32 - 2 characters is only allowed.",
                         Tag, Name + "/unlimitedText", unlimitedText);
+                */
             }
             else
                 throw new EncodingException(
